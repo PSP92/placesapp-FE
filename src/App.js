@@ -34,19 +34,19 @@ React.useEffect(() => {
 
   //handleCreate - function for when the create form is submitted
   const handleCreate = (newPlace) => {
-    fetch(url + "/place/", {
+    fetch(url + "/places", {
       method: "POST",
       headers: {
         "Content-Type":"application/json"
       },
       body: JSON.stringify(newPlace)
     })
-    .then(() => getplaces())
+    .then(() => getPlaces())
   }
 
    // handleUpdate - function for when the edit form is submitted
    const handleUpdate = (place) => {
-    fetch(url + "/place/" + place._id, {
+    fetch(url + "/places/" + place._id, {
       method: "PUT",
       headers: {
         "Content-Type":"application/json"
@@ -63,7 +63,7 @@ const selectPlace = (place) => {
 
   // deleteplace to delete inidividual places
   const deletePlace = (place) => {
-    fetch(url + "/place/" + place._id, {
+    fetch(url + "/places/" + place._id, {
       method: "delete"
     })
     .then(() => {
@@ -73,10 +73,10 @@ const selectPlace = (place) => {
 
   return (
     <div className="App">
-      <h1>place LISTING SITE</h1>
+      <h1>Fun Places</h1>
       <hr />
       <Link to="/create">
-        <button>Add place</button>
+        <button>Add New Fun Place</button>
       </Link>
       <main>
       <Switch>
@@ -87,8 +87,8 @@ const selectPlace = (place) => {
               <Display 
               {...rp} 
               places={places} 
-              selectplace={selectplace}
-              deleteplace={deleteplace} 
+              selectPlace={selectPlace}
+              deletePlace={deletePlace} 
               />
             )}
           />
@@ -99,7 +99,7 @@ const selectPlace = (place) => {
               <Form
                 {...rp}
                 label="create"
-                place={emptyplace}
+                place={emptyPlace}
                 handleSubmit={handleCreate}
               />
             )}
@@ -111,7 +111,7 @@ const selectPlace = (place) => {
               <Form 
               {...rp} 
               label="update" 
-              place={selectedplace} 
+              place={selectedPlace} 
               handleSubmit={handleUpdate} />
             )}
           />
